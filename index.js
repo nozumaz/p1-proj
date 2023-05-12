@@ -13,3 +13,10 @@ fetch("https://pokeapi.co/")
   .then((resp) => resp.json())
   .then((json) => console.log(json));
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  let form = document.querySelector("form");
+  form.addEventListener("submit", () => {
+  })
+})
