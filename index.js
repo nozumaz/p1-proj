@@ -5,9 +5,6 @@ var input = document.getElementById("textbox");
 var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
-btn.addEventListener("click",searchFromInput);
-rand_btn.addEventListener("click",generateRandomPkmn);
-input.addEventListener("keypress",searchFromEnter);
 
 function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
@@ -16,6 +13,7 @@ function generateRandomPkmn(event) {
 }
 
 const searchPkmn = (pkmnObj) => {
+
 
 	const {url, type, name} = pkmnObj //destruct object for url, type, name properties
   const apiUrl = `${url}${type}/${name}` //url string based on pokemon object properties
@@ -30,14 +28,24 @@ const searchPkmn = (pkmnObj) => {
 
 	const changeHtml = (data) => {
 		///adding to HTML
+
+    const pokemon = {
+      name: data.name,
+      id: data.id,
+      image: data.sprites['front_default'],
+      type: data.types.map((type) => type.type.name)  //map array of the pokemon's types
+      .join(', ')
+    }
 		const newHtml = `
 		<div class = "details" align="center">
 			<img src= "${data.sprites.front_default} " /> 
-      <h1 class= "name" > ${data.name} </h1>
-      <h3> type: <span class="out">${data.types[0].type.name} </span> </h3>
+      <h1 class= "name" > ${pokemon.name} </h1>
+      <h3> type: <span class="out">${pokemon.type} </span> </h3>
 		</div>`
 		pkmnHtml.innerHTML = newHtml //append HTML
 		input.value = ""; //clear input value to empty string
+
+    //displayPokemon(pokemon);
 	}
 
 }
@@ -76,14 +84,16 @@ console.log(pokedex);
 
 
 
-
-
-
 const fetchPkmn = () => {
   const promises = [];
 
-  for (let i = 1; i <= 151; i++) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+  for (let i = 1; i <= 6; i++) {
+
+    const randNum = getRandomInt(1,281);
+    console.log(randNum);
+    //searchPkmn(generateUrl(randNum));
+
+    const url = `https://pokeapi.co/api/v2/pokemon/${randNum}`;
     promises.push(fetch(url).then((res) => res.json()));
   }
 
@@ -94,13 +104,13 @@ const fetchPkmn = () => {
       image: data.sprites['front_default'],
       type: data.types.map((type) => type.type.name).join (', ')
     }))
-    //displayPokemon(pokemon);
+    displayPokemon(pokemon);
   })
 }
 
 
 //creates HTML elements to display each pokemon
-/* const displayPokemon = (pokemon) => {
+const displayPokemon = (pokemon) => {
   console.log(pokemon);
   const pokemonHTMLstr = pokemon
     .map(
@@ -116,7 +126,9 @@ const fetchPkmn = () => {
     .join('');
   pokedex.innerHTML = pokemonHTMLstr;
   
-} */
+}
 fetchPkmn();
 
-
+rand_btn.addEventListener("click",fetchPkmn);
+btn.addEventListener("click",searchFromInput);
+input.addEventListener("keypress",searchFromEnter);
