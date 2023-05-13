@@ -6,7 +6,7 @@ var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
 
-
+let randomize = true;
 
 
 function generateRandomPkmn(event) {
@@ -139,7 +139,18 @@ rand_btn.addEventListener("click",fetchPkmn);
 btn.addEventListener("click",searchFromInput);
 input.addEventListener("keypress",searchFromEnter);
 
+
+document.addEventListener("keydown", function(event){
+  console.log(event);
+  if (event.keyCode == 39) {  //when Right Arrow key is pressed,
+    fetchPkmn();              //fetch 6 random pokemon
+  }
+});
+
+
 document.onkeydown = function checkKey() {
+
+
   switch (event.keyCode) {
     case 38:
     console.log("Up key is pressed");
