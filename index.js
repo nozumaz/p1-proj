@@ -68,7 +68,6 @@ const fetchPkmn = (pkmnIds) => {
     console.log(randNum);
     //searchPkmn(generateUrl(randNum));
 
-    console.log(pkmnIds[1]);
     console.log(pkmnIds[i]);
     console.log(`https://pokeapi.co/api/v2/pokemon/${pkmnIds[i]}`);
     const url = `https://pokeapi.co/api/v2/pokemon/${pkmnIds[i]}`;
@@ -117,7 +116,20 @@ fetchPkmn(pkmnIds);  //call fetchPkmn() function to start initial state of page 
 
 
 //btn.addEventListener("click",searchFromInput);
-rand_btn.addEventListener("click",fetchPkmn);
+
+
+
+rand_btn.addEventListener("click",randomize(pkmnIds));
+
+function randomize(ids){
+  pkmnIds.forEach(randomizeArray);
+}
+
+function randomizeArray(item, index, arr) {
+  arr[index] = getRandomInt (1,281);
+}
+
+
 //input.addEventListener("keypress",searchFromEnter);
 
 
