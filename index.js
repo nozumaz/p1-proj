@@ -2,8 +2,11 @@ const pokedex = document.getElementById("pokedex");
 
 console.log(pokedex);
 
+
+//fetch pokemon from pokeapi
 const fetchPkmn = () => {
   const promises = [];
+
   for (let i = 1; i <= 151; i++) {
     const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     promises.push(fetch(url).then((res) => res.json()));
@@ -19,6 +22,8 @@ const fetchPkmn = () => {
     displayPokemon(pokemon);
   })
 }
+
+//creates HTML elements to display each pokemon
 const displayPokemon = (pokemon) => {
   console.log(pokemon);
   const pokemonHTMLstr = pokemon
