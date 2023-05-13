@@ -5,7 +5,7 @@ var input = document.getElementById("textbox");
 var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
-btn.addEventListener("click",generateRandomPkmn);
+btn.addEventListener("click",searchFromInput);
 rand_btn.addEventListener("click",generateRandomPkmn);
 
 function generateRandomPkmn(event) {
@@ -54,6 +54,12 @@ function generateUrl(val) {
     name: val,
   }
   return pkmnObj;
+}
+
+function searchFromInput(event) {
+  if(input.value.length > 0) {
+    searchPkmn(generateUrl(input.value));
+  }
 }
 
 console.log(pokedex);
