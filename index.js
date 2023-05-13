@@ -7,6 +7,7 @@ const pkmnHtml = document.querySelector('.result');
 
 btn.addEventListener("click",searchFromInput);
 rand_btn.addEventListener("click",generateRandomPkmn);
+input.addEventListener("keypress",searchFromEnter);
 
 function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
@@ -58,6 +59,12 @@ function generateUrl(val) {
 
 function searchFromInput(event) {
   if(input.value.length > 0) {
+    searchPkmn(generateUrl(input.value));
+  }
+}
+
+function searchFromEnter(event) {
+  if(event.keyCode === 13 && input.value.length > 0) {
     searchPkmn(generateUrl(input.value));
   }
 }
