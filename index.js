@@ -120,27 +120,23 @@ fetchPkmn(pkmnIds);  //call fetchPkmn() function to start initial state of page 
 rand_btn.addEventListener("click",fetchPkmn);
 //input.addEventListener("keypress",searchFromEnter);
 
+
+
+
 document.addEventListener("keydown", function(event){
   console.log(event);
   if (event.keyCode == 39) {  //when Right Arrow key is pressed,
 
-    pkmnIds[0] = pkmnIds[0] + 6;
-    pkmnIds[1] = pkmnIds[1] + 6;
-    pkmnIds[2] = pkmnIds[2] + 6;
-    pkmnIds[3] = pkmnIds[3] + 6;
-    pkmnIds[4] = pkmnIds[4] + 6;
-    pkmnIds[5] = pkmnIds[5] + 6;
-/*       pkmnIds.map(function(entry) {
-      console.log(pkmnIds[0]);
-      return entry+1;
-     })*/
-
+    pkmnIds.forEach(arrayAddOne)
+    
     console.log(pkmnIds[0]);
 
     fetchPkmn(pkmnIds);              //fetch 6 pokemon
   }
 });
-
+function arrayAddOne(item, index, arr) {
+  arr[index] = item + 1;
+}
 
 /* document.onkeydown = function checkKey() {
 
