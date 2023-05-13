@@ -1,5 +1,11 @@
 const pokedex = document.getElementById("pokedex");
 
+var btn = document.getElementsByTagName("button")[0];
+var input = document.getElementById("textbox");
+var rand_btn = document.getElementById("random");
+const pkmnhtml = document.querySelector('.pokemon');
+
+
 console.log(pokedex);
 
 
