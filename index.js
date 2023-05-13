@@ -5,6 +5,29 @@ var input = document.getElementById("textbox");
 var rand_btn = document.getElementById("random");
 const pkmnhtml = document.querySelector('.pokemon');
 
+btn.addEventListener("click",generateRandomPkmn);
+rand_btn.addEventListener("click",generateRandomPkmn);
+
+function generateRandomPkmn(event) {
+  const randNum = getRandomInt(1,281);
+  console.log(randNum);
+  //searchPkmn(generateUrl(randNum));
+}
+
+function getRandomInt(min,max) {
+  var randInt = Math.floor(Math.random() * (max - min) + min);
+  console.log(randInt);
+  return randInt;
+}
+
+function generateUrl(val) {
+  const pkmnObj = {
+    url: "https://pokeapi.co/api/v2/",
+    type: "pokemon",
+    name: val,
+  }
+  return pkmnObj;
+}
 
 console.log(pokedex);
 
@@ -55,3 +78,5 @@ const fetchPkmn = () => {
   
 } */
 fetchPkmn();
+
+
