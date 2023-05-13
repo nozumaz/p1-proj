@@ -1,13 +1,10 @@
 const pokedex = document.getElementById("pokedex");
-
 var btn = document.getElementsByTagName("button")[0];
 var input = document.getElementById("textbox");
 var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
-
 //let randomize = true;
-
 
 /* function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
@@ -16,7 +13,6 @@ const pkmnHtml = document.querySelector('.result');
 } */
 
 /* const searchPkmn = (pkmnObj) => {
-
 
 	const {url, type, name} = pkmnObj //destruct object for url, type, name properties
   const apiUrl = `${url}${type}/${name}` //url string based on pokemon object properties
@@ -90,17 +86,14 @@ function searchFromEnter(event) {
 
 console.log(pokedex);
 
-
 //fetch pokemon from pokeapi
-
-
 
 const fetchPkmn = () => {
   console.log('fetching pokemon');
   const promises = [];
 
   for (let i = 1; i <= 6; i++) {
-    let num = getRandomInt(1,281);
+    let num = getRandomInt(1,281);  //pick random number between 1 and 1281 (number of max pokemon)
 /*     let num = i;
     if (randomize == true) {
       num = getRandomInt(1,281);
@@ -123,7 +116,6 @@ const fetchPkmn = () => {
     displayPokemon(pokemon);
   })
 }
-
 
 //creates HTML elements to display each pokemon
 const displayPokemon = (pokemon) => {
