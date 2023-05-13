@@ -1,11 +1,17 @@
-const pokedex = document.getElementById("pokedex");
-var rand_btn = document.getElementById("random");
-//var btn = document.getElementsByTagName("button")[0];
-//var input = document.getElementById("textbox");
-//const pkmnHtml = document.querySelector('.result');
+const pokemonDisplay = document.getElementById("pokemonDisplay");
+const rand_btn = document.getElementById("random");
+let btn = document.getElementById("searchBtn");
+let input = document.getElementById("textbox");
+const pkmnHtml = document.querySelector('.result');
+
+
+let pkmnIds = [1,2,3,4,5,6];
+//console.log(pkmnIds);
+
+console.log(pkmnIds[0]);
 
 function getRandomInt(min,max) {
-  var randInt = Math.floor(Math.random() * (max - min) + min);
+  let randInt = Math.floor(Math.random() * (max - min) + min);
   console.log(randInt);
   return randInt;
 }
@@ -39,16 +45,20 @@ function searchFromEnter(event) {
   }
 }
 
-console.log(pokedex);
+console.log(pokemonDisplay);
 
 //fetch pokemon from pokeapi
 
-const fetchPkmn = () => {
+
+
+const fetchPkmn = (pkmnIds) => {
   console.log('fetching pokemon');
+  //console.log(pkmnIds[0]);
   const promises = [];
 
   for (let i = 1; i <= 6; i++) {
-    let num = getRandomInt(1,281);  //pick random number between 1 and 1281 (number of max pokemon)
+    //let num = getRandomInt(1,281);  //pick random number between 1 and 1281 (number of max pokemon)
+
 /*     let num = i;
     if (randomize == true) {
       num = getRandomInt(1,281);
@@ -60,7 +70,6 @@ const fetchPkmn = () => {
     const url = `https://pokeapi.co/api/v2/pokemon/${randNum}`;
     promises.push(fetch(url).then((res) => res.json()));
   }
-
   Promise.all(promises).then(results => {
     const pokemon = results.map((data) => ({
       name: data.name,
@@ -68,8 +77,16 @@ const fetchPkmn = () => {
       image: data.sprites['front_default'],
       type: data.types.map((type) => type.type.name).join (', ')
     }))
+    console.log(results);
     displayPokemon(pokemon);
+    createCard(pokemon);
   })
+}
+
+function createCard(pokemon) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  console.log(pokemon.name);
 }
 
 //creates HTML elements to display each pokemon
@@ -87,9 +104,11 @@ const displayPokemon = (pokemon) => {
       `
     )
     .join('');
-  pokedex.innerHTML = pokemonHTMLstr;
-  
+  pokemonDisplay.innerHTML = pokemonHTMLstr; 
 }
+
+
+
 fetchPkmn();  //call fetchPkmn() function to start initial state of page with 6 random pokemon
 
 
