@@ -3,7 +3,7 @@ const pokedex = document.getElementById("pokedex");
 var btn = document.getElementsByTagName("button")[0];
 var input = document.getElementById("textbox");
 var rand_btn = document.getElementById("random");
-const pkmnhtml = document.querySelector('.pokemon');
+const pkmnHtml = document.querySelector('.result');
 
 btn.addEventListener("click",generateRandomPkmn);
 rand_btn.addEventListener("click",generateRandomPkmn);
@@ -11,7 +11,34 @@ rand_btn.addEventListener("click",generateRandomPkmn);
 function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
   console.log(randNum);
-  //searchPkmn(generateUrl(randNum));
+  searchPkmn(generateUrl(randNum));
+}
+
+const searchPkmn = (pkmnObj) => {
+
+	const {url, type, name} = pkmnObj //destruct object for url, type, name properties
+  const apiUrl = `${url}${type}/${name}` //url string based on pokemon object properties
+
+	fetch(apiUrl)
+		.then( (raw_data) => raw_data.json()) 
+		.then( (data) => changeHtml(data))
+		.catch((err) => { //catch if error occurs
+      pkmnHtml.innerHTML = 
+			  `<h1> Error, please check code for any issues. </h1>`;
+		})
+
+	const changeHtml = (data) => {
+		///adding to HTML
+		const newHtml = `
+		<div class = "details" align="center">
+			<img src= "${data.sprites.front_default} " /> 
+      <h1 class= "name" > ${data.name} </h1>
+      <h3> type: <span class="out">${data.types[0].type.name} </span> </h3>
+		</div>`
+		pkmnHtml.innerHTML = newHtml //append HTML
+		input.value = ""; //clear input value to empty string
+	}
+
 }
 
 function getRandomInt(min,max) {
