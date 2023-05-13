@@ -72,7 +72,8 @@ function searchFromInput(event) {
 }
 
 function searchFromEnter(event) {
-  if(event.keyCode === 13 && input.value.length > 0) {
+  //if(event.keyCode === 13 && input.value.length > 0) {
+  if(event.keyCode === 13) {
     searchPkmn(generateUrl(input.value));
   }
 }
@@ -131,4 +132,4 @@ fetchPkmn();
 
 rand_btn.addEventListener("click",fetchPkmn);
 btn.addEventListener("click",searchFromInput);
-input.addEventListener("keypress",searchFromEnter);
+input.addEventListener("keypress",fetchPkmn);
