@@ -6,6 +6,9 @@ var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
 
+
+
+
 function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
   console.log(randNum);
@@ -73,8 +76,10 @@ function searchFromInput(event) {
 
 function searchFromEnter(event) {
   //if(event.keyCode === 13 && input.value.length > 0) {
-  if(event.keyCode === 13) {
-    searchPkmn(generateUrl(input.value));
+    console.log('key pressed')
+  if(event.keyCode == 39) {
+    fetchPkmn();
+    //searchPkmn(generateUrl(input.value));
   }
 }
 
@@ -117,11 +122,11 @@ const displayPokemon = (pokemon) => {
     .map(
       (pkmn) =>
       `
-      <li class="card">
+      <div class="card">
         <img class="card-image" src="${pkmn.image}"/>
         <h2 class="card-title">${pkmn.id}. ${pkmn.name}</h2>
         <p class="card-subtitle">Type: ${pkmn.type}</p>
-      </li>
+      </div>
       `
     )
     .join('');
@@ -132,4 +137,22 @@ fetchPkmn();
 
 rand_btn.addEventListener("click",fetchPkmn);
 btn.addEventListener("click",searchFromInput);
-input.addEventListener("keypress",fetchPkmn);
+input.addEventListener("keypress",searchFromEnter);
+
+document.onkeydown = function checkKey() {
+  switch (event.keyCode) {
+    case 38:
+    console.log("Up key is pressed");
+    break;
+case 40:
+    console.log("Down key is pressed");
+    
+    //break;
+case 37:
+    console.log("left key is pressed");
+    break;
+case 39:
+    console.log("right key is pressed");
+    fetchPkmn;
+  }
+};
