@@ -6,7 +6,7 @@ var rand_btn = document.getElementById("random");
 const pkmnHtml = document.querySelector('.result');
 
 
-let randomize = true;
+//let randomize = true;
 
 
 function generateRandomPkmn(event) {
@@ -69,8 +69,13 @@ function generateUrl(val) {
 }
 
 function searchFromInput(event) {
+  console.log('searching by input')
   if(input.value.length > 0) {
-    searchPkmn(generateUrl(input.value));
+    console.log('checking input length')
+    //randomize = false;
+    fetchPkmn();
+    //searchPkmn(generateUrl(input.value));
+    //randomize = true;
   }
 }
 
@@ -91,10 +96,15 @@ console.log(pokedex);
 
 
 const fetchPkmn = () => {
+  console.log('fetching pokemon');
   const promises = [];
 
   for (let i = 1; i <= 6; i++) {
-
+    let num = num = getRandomInt(1,281);
+/*     let num = i;
+    if (randomize == true) {
+      num = getRandomInt(1,281);
+    } */
     const randNum = getRandomInt(1,281);
     console.log(randNum);
     //searchPkmn(generateUrl(randNum));
@@ -135,6 +145,8 @@ const displayPokemon = (pokemon) => {
 }
 fetchPkmn();
 
+
+
 rand_btn.addEventListener("click",fetchPkmn);
 btn.addEventListener("click",searchFromInput);
 input.addEventListener("keypress",searchFromEnter);
@@ -148,7 +160,7 @@ document.addEventListener("keydown", function(event){
 });
 
 
-document.onkeydown = function checkKey() {
+/* document.onkeydown = function checkKey() {
 
 
   switch (event.keyCode) {
@@ -165,5 +177,5 @@ case 37:
 case 39:
     console.log("right key is pressed");
     fetchPkmn;
-  }
-};
+  } */
+//};
