@@ -4,6 +4,12 @@ console.log(pokedex);
 
 
 //fetch pokemon from pokeapi
+
+
+
+
+
+
 const fetchPkmn = () => {
   const promises = [];
 
@@ -19,12 +25,13 @@ const fetchPkmn = () => {
       image: data.sprites['front_default'],
       type: data.types.map((type) => type.type.name).join (', ')
     }))
-    displayPokemon(pokemon);
+    //displayPokemon(pokemon);
   })
 }
 
+
 //creates HTML elements to display each pokemon
-const displayPokemon = (pokemon) => {
+/* const displayPokemon = (pokemon) => {
   console.log(pokemon);
   const pokemonHTMLstr = pokemon
     .map(
@@ -40,5 +47,5 @@ const displayPokemon = (pokemon) => {
     .join('');
   pokedex.innerHTML = pokemonHTMLstr;
   
-}
+} */
 fetchPkmn();
