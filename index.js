@@ -9,13 +9,13 @@ const pkmnHtml = document.querySelector('.result');
 //let randomize = true;
 
 
-function generateRandomPkmn(event) {
+/* function generateRandomPkmn(event) {
   const randNum = getRandomInt(1,281);
   console.log(randNum);
   searchPkmn(generateUrl(randNum));
-}
+} */
 
-const searchPkmn = (pkmnObj) => {
+/* const searchPkmn = (pkmnObj) => {
 
 
 	const {url, type, name} = pkmnObj //destruct object for url, type, name properties
@@ -49,9 +49,9 @@ const searchPkmn = (pkmnObj) => {
 		input.value = ""; //clear input value to empty string
 
     //displayPokemon(pokemon);
-	}
+	} */
 
-}
+//}
 
 function getRandomInt(min,max) {
   var randInt = Math.floor(Math.random() * (max - min) + min);
@@ -59,16 +59,16 @@ function getRandomInt(min,max) {
   return randInt;
 }
 
-function generateUrl(val) {
+/* function generateUrl(val) {
   const pkmnObj = {
     url: "https://pokeapi.co/api/v2/",
     type: "pokemon",
     name: val,
   }
   return pkmnObj;
-}
+} */
 
-function searchFromInput(event) {
+/* function searchFromInput(event) {
   console.log('searching by input')
   if(input.value.length > 0) {
     console.log('checking input length')
@@ -77,7 +77,7 @@ function searchFromInput(event) {
     //searchPkmn(generateUrl(input.value));
     //randomize = true;
   }
-}
+} */
 
 function searchFromEnter(event) {
   //if(event.keyCode === 13 && input.value.length > 0) {
@@ -100,7 +100,7 @@ const fetchPkmn = () => {
   const promises = [];
 
   for (let i = 1; i <= 6; i++) {
-    let num = num = getRandomInt(1,281);
+    let num = getRandomInt(1,281);
 /*     let num = i;
     if (randomize == true) {
       num = getRandomInt(1,281);
@@ -143,14 +143,12 @@ const displayPokemon = (pokemon) => {
   pokedex.innerHTML = pokemonHTMLstr;
   
 }
-fetchPkmn();
+fetchPkmn();  //call fetchPkmn() function to start initial state of page with 6 random pokemon
 
 
-
+//btn.addEventListener("click",searchFromInput);
 rand_btn.addEventListener("click",fetchPkmn);
-btn.addEventListener("click",searchFromInput);
 input.addEventListener("keypress",searchFromEnter);
-
 
 document.addEventListener("keydown", function(event){
   console.log(event);
