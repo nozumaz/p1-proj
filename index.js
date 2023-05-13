@@ -5,13 +5,12 @@ const fetchPkmn = () => {
   })
   .then((data) => {
     console.log(data);
-    const pokemon = {};
-    pokemon['name'] = data.name;
-    pokemon['id'] = data.id;
-    pokemon['image'] = data.sprites['front_default'];
-    pokemon['type'] = data.types
-      .map((type) => type.type.name)
-      .join(', ');
+    const pokemon = {
+      name: data.name,
+      id: data.id,
+      image: data.sprites['front_default'],
+      type: data.types.map((type) => type.type.name).join (', ')
+    };
     console.log(pokemon);
   })
 }
