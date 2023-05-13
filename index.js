@@ -1,3 +1,7 @@
+const pokedex = document.getElementById("pokedex");
+
+console.log(pokedex);
+
 const fetchPkmn = () => {
   const promises = [];
   for (let i = 1; i <= 151; i++) {
@@ -12,9 +16,24 @@ const fetchPkmn = () => {
       image: data.sprites['front_default'],
       type: data.types.map((type) => type.type.name).join (', ')
     }))
-    console.log(pokemon);
+    displayPokemon(pokemon);
   })
 }
-
-
+const displayPokemon = (pokemon) => {
+  console.log(pokemon);
+  const pokemonHTMLstr = pokemon
+    .map(
+      (pkmn) =>
+      `
+      <p>
+        <img src="${pkmn.image}"/>
+        <h2>${pkmn.id}. ${pkmn.name}</h2>
+        <p>Type: ${pkmn.type}</p>
+      </p>
+      `
+    )
+    .join('');
+  pokedex.innerHTML = pokemonHTMLstr;
+  
+}
 fetchPkmn();
