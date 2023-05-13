@@ -8,6 +8,7 @@ const pkmnHtml = document.querySelector('.result');
 let pkmnIds = [1,2,3,4,5,6];
 //console.log(pkmnIds);
 
+
 console.log(pkmnIds[0]);
 
 function getRandomInt(min,max) {
@@ -53,10 +54,10 @@ console.log(pokemonDisplay);
 
 const fetchPkmn = (pkmnIds) => {
   console.log('fetching pokemon');
-  //console.log(pkmnIds[0]);
+  console.log(pkmnIds[0]);
   const promises = [];
 
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 0; i < 6; i++) {
     //let num = getRandomInt(1,281);  //pick random number between 1 and 1281 (number of max pokemon)
 
 /*     let num = i;
@@ -67,7 +68,10 @@ const fetchPkmn = (pkmnIds) => {
     console.log(randNum);
     //searchPkmn(generateUrl(randNum));
 
-    const url = `https://pokeapi.co/api/v2/pokemon/${randNum}`;
+    console.log(pkmnIds[1]);
+    console.log(pkmnIds[i]);
+    console.log(`https://pokeapi.co/api/v2/pokemon/${pkmnIds[i]}`);
+    const url = `https://pokeapi.co/api/v2/pokemon/${pkmnIds[i]}`;
     promises.push(fetch(url).then((res) => res.json()));
   }
   Promise.all(promises).then(results => {
@@ -109,7 +113,7 @@ const displayPokemon = (pokemon) => {
 
 
 
-fetchPkmn();  //call fetchPkmn() function to start initial state of page with 6 random pokemon
+fetchPkmn(pkmnIds);  //call fetchPkmn() function to start initial state of page with 6 random pokemon
 
 
 //btn.addEventListener("click",searchFromInput);
@@ -119,7 +123,21 @@ rand_btn.addEventListener("click",fetchPkmn);
 document.addEventListener("keydown", function(event){
   console.log(event);
   if (event.keyCode == 39) {  //when Right Arrow key is pressed,
-    fetchPkmn();              //fetch 6 random pokemon
+
+    pkmnIds[0] = pkmnIds[0] + 6;
+    pkmnIds[1] = pkmnIds[1] + 6;
+    pkmnIds[2] = pkmnIds[2] + 6;
+    pkmnIds[3] = pkmnIds[3] + 6;
+    pkmnIds[4] = pkmnIds[4] + 6;
+    pkmnIds[5] = pkmnIds[5] + 6;
+/*       pkmnIds.map(function(entry) {
+      console.log(pkmnIds[0]);
+      return entry+1;
+     })*/
+
+    console.log(pkmnIds[0]);
+
+    fetchPkmn(pkmnIds);              //fetch 6 pokemon
   }
 });
 
