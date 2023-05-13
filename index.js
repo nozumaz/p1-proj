@@ -25,11 +25,11 @@ const displayPokemon = (pokemon) => {
     .map(
       (pkmn) =>
       `
-      <p>
-        <img src="${pkmn.image}"/>
-        <h2>${pkmn.id}. ${pkmn.name}</h2>
-        <p>Type: ${pkmn.type}</p>
-      </p>
+      <li class="card">
+        <img class="card-image" src="${pkmn.image}"/>
+        <h2 class="card-title">${pkmn.id}. ${pkmn.name}</h2>
+        <p class="card-subtitle">Type: ${pkmn.type}</p>
+      </li>
       `
     )
     .join('');
