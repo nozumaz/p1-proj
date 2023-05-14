@@ -1,23 +1,23 @@
-let pokemonIDs = [1,2,3,4,5,6];                     //define array of 6 pokemon IDs
-let rand_btn = document.getElementById("random");   //define random button based on HTML element
+let rand_btn = document.getElementById("random");   //define random button for event logging
 
 function getRandomInt(min,max) {                    //function to generate random number
-	return randInt = Math.floor(Math.random() * (max));
+	return randInt = Math.floor(Math.random() * (max)) + 1;
   }
 
-//fetchPokemon method takes in ids parameter, generates random numbers, and fetches 6 pokemon from pokeapi
+//fetchPokemon method generates random numbers and fetches 6 pokemon from pokeapi
 //then maps the fetched pokemon data into an object with name, id, image, and type properties
-const fetchPokemon = (ids) => {
+const fetchPokemon = () => {
 	const promises = [];
-	console.log("fetching pokemon");
+	//console.log("fetching pokemon");
 
 	for (let i = 0; i < 6; i++) {
-		const randNum = getRandomInt(1,281);
-		console.log(randNum);
+		const randNum = getRandomInt(1,281);		//checks from pokemon #1 through #1281
+		console.log(randNum);						//log randomly generated number
 		const url = `https://pokeapi.co/api/v2/pokemon/${randNum}`;
 		promises.push(fetch(url).then((res) => res.json()));
 
 	}
+	//use promise to fetch all results in the same call and map properties to pokemon object
 	Promise.all(promises).then((results) => {
 		const pokemon = results.map((data) => ({
 			name: data.name,
@@ -27,7 +27,6 @@ const fetchPokemon = (ids) => {
 		}));
 		//console.log(pokemon);
 
-		//displayPokemon(pokemon);
 		createCard(pokemon);
 	});
 };
@@ -53,7 +52,7 @@ const createCard = (pokemon) => {
 		//grabs pokemon name from the mapped name property
 		const pkName = pokemonMapped.name;
 
-		//capitalize first letter of the pokemon name
+		//capitalize first letter of pokemon name
 		const pkNameCap = pkName.charAt(0).toUpperCase()
 			+ pkName.slice(1);
 
@@ -78,19 +77,18 @@ const createCard = (pokemon) => {
 	)
 }
 
-//eventListener to detect button click on the random button
+//eventListener to detect button click on the Randomize! button
 rand_btn.addEventListener("click", function(event){
 	console.log(event);
-	fetchPokemon(pokemonIDs);
+	fetchPokemon();
 });
 
-//eventListener to detect right arrow key press
+//eventListener to detect right or left arrow key press
 document.addEventListener("keydown", function(event){
 	console.log(event);						//log keydown event
-	if (event.keyCode == 39) {				//when Right Arrow key is pressed,
-	  fetchPokemon(pokemonIDs);             //fetch 6 random pokemon
+	if (event.keyCode == 39 || event.keyCode == 37) {				//when Right or Left Arrow key is pressed,
+	  fetchPokemon();             //fetch 6 random pokemon
 	}
-  });
+});
 
-
-fetchPokemon(pokemonIDs);					//call fetchPokemon when page loads
+fetchPokemon();					//call fetchPokemon when page loads
