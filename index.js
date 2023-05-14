@@ -1,12 +1,14 @@
-let pokemonIDs = [1,2,3,4,5,6];
-let rand_btn = document.getElementById("random");
+let pokemonIDs = [1,2,3,4,5,6];                     //define array of 6 pokemon IDs
+let rand_btn = document.getElementById("random");   //define random button based on HTML element
 
-function getRandomInt(min,max) {
+function getRandomInt(min,max) {                    //function to generate random number
 	let randInt = Math.floor(Math.random() * (max - min) + min);
-	console.log(randInt);
+	console.log(randInt);                             //log random number to console
 	return randInt;
   }
 
+//fetchPokemon method takes in ids parameter, generates random numbers, and fetches 6 pokemon from pokeapi
+//then maps the fetched pokemon data into an object with name, id, image, and type properties
 const fetchPokemon = (ids) => {
 	const promises = [];
 	console.log("fetching pokemon");
@@ -29,6 +31,7 @@ const fetchPokemon = (ids) => {
 	});
 };
 
+//creates HTML elements to display pokemon on webpage
 const displayPokemon = (pokemon) => {
 	const pokemonHTMLString = pokemon
 		.map(
@@ -44,10 +47,13 @@ const displayPokemon = (pokemon) => {
 	pokedex.innerHTML = pokemonHTMLString;
 }
 
+//eventListener to detect button click on the random button
 rand_btn.addEventListener("click", function(event){
 	console.log(event);
 	fetchPokemon(pokemonIDs);
 });
+
+//eventListener to detect right arrow key press
 document.addEventListener("keydown", function(event){
 	console.log(event);						//log keydown event
 	if (event.keyCode == 39) {				//when Right Arrow key is pressed,
@@ -55,4 +61,5 @@ document.addEventListener("keydown", function(event){
 	}
   });
 
-  fetchPokemon(pokemonIDs);					//call fetchPokemon when page loads
+
+fetchPokemon(pokemonIDs);					//call fetchPokemon when page loads
