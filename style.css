@@ -1,17 +1,18 @@
 body {
-    background: rgb(155, 191, 201);
-  }
-  
+  background-color:rgb(181, 219, 255);
 
-  .card {
-    background-color:white;
-    padding:40px;
+}
 
-  }
+.card {
+  list-style: none;
+  padding: 40px;
+  background-color: #f4f4f4;
+  color: #222;
+}
 
-  #pokemonDisplay {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-    grid-gap: 30px;
-    padding-inline-start: 0;
-  }
+#pokedex {
+  padding-inline-start: 0;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+}
