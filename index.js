@@ -2,9 +2,7 @@ let pokemonIDs = [1,2,3,4,5,6];                     //define array of 6 pokemon 
 let rand_btn = document.getElementById("random");   //define random button based on HTML element
 
 function getRandomInt(min,max) {                    //function to generate random number
-	let randInt = Math.floor(Math.random() * (max - min) + min);
-	console.log(randInt);                             //log random number to console
-	return randInt;
+	return randInt = Math.floor(Math.random() * (max));
   }
 
 //fetchPokemon method takes in ids parameter, generates random numbers, and fetches 6 pokemon from pokeapi
@@ -15,6 +13,7 @@ const fetchPokemon = (ids) => {
 
 	for (let i = 0; i < 6; i++) {
 		const randNum = getRandomInt(1,281);
+		console.log(randNum);
 		const url = `https://pokeapi.co/api/v2/pokemon/${randNum}`;
 		promises.push(fetch(url).then((res) => res.json()));
 
@@ -35,7 +34,7 @@ const fetchPokemon = (ids) => {
 
 //creates HTML elements to display in webpage
 const createCard = (pokemon) => {
-	const appendLocation = document.getElementById("pokedex");
+	const appendLocation = document.getElementById("displayArea");
 
 	//while loop to remove any existing child divs to keep it limited to 6 pokemon at a time
 	while (appendLocation.firstChild){
@@ -51,22 +50,29 @@ const createCard = (pokemon) => {
 		const appendH2 = document.createElement('h2');
 		const appendP = document.createElement('p');
 
+		//grabs pokemon name from the mapped name property
+		const pkName = pokemonMapped.name;
+
+		//capitalize first letter of the pokemon name
+		const pkNameCap = pkName.charAt(0).toUpperCase()
+			+ pkName.slice(1);
+
+		//establishing properties of the created HTML elements
 		appendDiv.setAttribute("class","card");
 
 		appendImg.setAttribute("class","card-image");
 		appendImg.setAttribute("src",appendUrl);
 
 		appendH2.setAttribute("class","card-title");
-		appendH2.textContent = pokemonMapped.name;
+		appendH2.textContent = pkNameCap;
 
 		appendP.setAttribute("class","card-subtitle");
 		appendP.textContent = `Type: ${pokemonMapped.type}`
 
-		appendDiv.append(appendImg);
-		appendDiv.append(appendH2);
-		appendDiv.append(appendP);
+		//add h2,p,img nodes as children of div
+		appendDiv.append(appendH2,appendP,appendImg);
 
-
+		//add created div to #displayArea
 		appendLocation.appendChild(appendDiv);
 		}
 	)
