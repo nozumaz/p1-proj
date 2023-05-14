@@ -27,24 +27,43 @@ const fetchPokemon = (ids) => {
 			type: data.types.map((type) => type.type.name).join(', ')
 		}));
 		//console.log(pokemon);
-		displayPokemon(pokemon);
+
+		//displayPokemon(pokemon);
+		createCard(pokemon);
 	});
 };
 
-//creates HTML elements to display pokemon on webpage
-const displayPokemon = (pokemon) => {
-	const pokemonHTMLString = pokemon
-		.map(
-			(pokemonDisplay) =>
-			`
-			<div class="card">
-			<img class="card-image" src="${pokemonDisplay.image}"/>
-			<h2 class="card-title">${pokemonDisplay.id}. ${pokemonDisplay.name}</h2>
-			<p class="card-subtitle">Type: ${pokemonDisplay.type}</p>
-		  	</div>
-			`
-		).join('');
-	pokedex.innerHTML = pokemonHTMLString;
+//creates HTML elements to display in webpage
+const createCard = (pokemon) => {
+	const pokemonMap = pokemon.map(
+		(pokemonMapped) => {
+
+		const appendDiv = document.createElement('div');
+		const appendImg = document.createElement('img');
+		const appendUrl = pokemonMapped.image;
+		const appendH2 = document.createElement('h2');
+		const appendP = document.createElement('p');
+
+		//console.log(pokemonMapped.image);
+		appendDiv.setAttribute("class","card");
+
+		appendImg.setAttribute("class","card-image");
+		appendImg.setAttribute("src",appendUrl);
+
+		appendH2.setAttribute("class","card-title");
+		appendH2.textContent = pokemonMapped.name;
+
+		appendP.setAttribute("class","card-subtitle");
+		appendP.textContent = `Type: ${pokemonMapped.type}`
+
+		appendDiv.append(appendImg);
+		appendDiv.append(appendH2);
+		appendDiv.append(appendP);
+
+		const appendLocation = document.getElementById("pokedex");
+		appendLocation.appendChild(appendDiv);
+		}
+	)
 }
 
 //eventListener to detect button click on the random button
