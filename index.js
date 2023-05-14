@@ -35,6 +35,13 @@ const fetchPokemon = (ids) => {
 
 //creates HTML elements to display in webpage
 const createCard = (pokemon) => {
+	const appendLocation = document.getElementById("pokedex");
+
+	//while loop to remove any existing child divs to keep it limited to 6 pokemon at a time
+	while (appendLocation.firstChild){
+		appendLocation.removeChild(appendLocation.firstChild);
+	}
+
 	const pokemonMap = pokemon.map(
 		(pokemonMapped) => {
 
@@ -44,7 +51,6 @@ const createCard = (pokemon) => {
 		const appendH2 = document.createElement('h2');
 		const appendP = document.createElement('p');
 
-		//console.log(pokemonMapped.image);
 		appendDiv.setAttribute("class","card");
 
 		appendImg.setAttribute("class","card-image");
@@ -60,7 +66,7 @@ const createCard = (pokemon) => {
 		appendDiv.append(appendH2);
 		appendDiv.append(appendP);
 
-		const appendLocation = document.getElementById("pokedex");
+
 		appendLocation.appendChild(appendDiv);
 		}
 	)
